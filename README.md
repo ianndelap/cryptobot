@@ -1,74 +1,35 @@
-# Data analysis
-- Document here the project: cryptobot
-- Description: Project Description
-- Data Source:
-- Type of analysis:
+# Mischa's Crypto Trader
+Automating crypto trading with python.
 
-Please document the project the better you can.
+## What is this?
+A jupyter notebook to demonstrate automating crypto trading. Includes defining a strategy with automated parameter tuning and backtesting.
 
-# Startup the project
+Please [read my article describing how it works](https://spiegelmock.com/2021/11/09/how-to-trade-crypto-in-your-sleep-with-python/) for more details and how to use it yourself.
 
-The initial setup.
+## How does it work?
+Allows you to [pick a strategy](https://github.com/twopirllc/pandas-ta/blob/main/examples/PandasTA_Strategy_Examples.ipynb) and optimize the parameters to the trading bot and strategy automatically. Different parameters are tried and net profit calculated during backtesting.
 
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
+* Uses [pyjuque](https://github.com/tudorelu/pyjuque) to perform backtesting and trading and bot framework.
+* Technical analysis performed by [ta-lib](https://www.ta-lib.org/) and [pandas-ta](https://github.com/twopirllc/pandas-ta/) - generate buy and sell signals from time series exchange data.
+* Crypto exchange abstraction provided by [CCXT](https://ccxt.readthedocs.io/en/latest/) - connects to any crypto exchange.
+* Parameter tuning with [scikit-optimize](https://scikit-optimize.github.io/) - Minimizes objective function in trading bot and strategy parameter space.
+
+## How do I test strategies? 
+Load up [the notebook](strategize-skopt.ipynb) in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/).
+
+## Screenshots
+<img width="886" alt="Live trading" src="https://user-images.githubusercontent.com/245131/139648359-22c86796-3064-4cd6-aa8e-455bf4951d8a.png">
+
+![backtesting](backtest.png)
+
+## How do I run the bot?
+Create a .env file with your exchange API key
+```env
+EXCHG_API_KEY=daJF91jf9soq01j9wwl
+EXCHG_SECRET=8ABC9130181DEB9131
+#EXCHG_SUBACCOUNT=trader
 ```
 
-Unittest test:
-```bash
-make clean install test
-```
+Run ./run-bot.py
 
-Check for cryptobot in gitlab.com/{group}.
-If your project is not set please add it:
-
-- Create a new project on `gitlab.com/{group}/cryptobot`
-- Then populate it:
-
-```bash
-##   e.g. if group is "{group}" and project_name is "cryptobot"
-git remote add origin git@github.com:{group}/cryptobot.git
-git push -u origin master
-git push -u origin --tags
-```
-
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-cryptobot-run
-```
-
-# Install
-
-Go to `https://github.com/{group}/cryptobot` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
-```
-
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/cryptobot.git
-cd cryptobot
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-cryptobot-run
-```
+For more details about building and running the bot see the Dockerfile.
